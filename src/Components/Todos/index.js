@@ -3,15 +3,17 @@ import { TodoForm } from './TodoForm';
 import './index.css';
 import { TodoList } from './TodoList';
 import {addTodo, generateId} from './../../lib/todoHelpers';
+import {getAll, create} from './../../lib/TodoAPI';
 
 class ToDos extends Component {
     state = {
-        todos: [
-            {id:1, name:'Learn JSX', isComplete: true},
-            {id:2, name:'Build an Awesome app', isComplete: false},
-            {id:3, name:'Ship It', isComplete: false}
-        ],
+        todos: [],
         currentTodo: ''
+    }
+
+    componentDidMount() {
+        getAll()
+        .then(todos => this.setState({todos}))
     }
 
 handleSubmit = (e) => {
@@ -23,6 +25,8 @@ handleSubmit = (e) => {
         todos: updateTodos,
         currentTodo: ''
     })
+    create(newTodo)
+    .then(() => console.log('todo added'))
 }
 
 handleEmptySubmit = (e) => {
