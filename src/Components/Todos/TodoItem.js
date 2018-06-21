@@ -11,6 +11,5 @@ export const TodoItem = (props) => {
 
 TodoItem.propTypes = {
     name: PropTypes.string.isRequired,
-    isComplete: PropTypes.bool,
-    id: PropTypes.number.isRequired
+    isComplete: PropTypes.bool
 }
